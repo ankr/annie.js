@@ -1,0 +1,30 @@
+{
+    "name": "@ankr/tween",
+    "version": "0.0.1",
+    "description": "",
+    "type": "module",
+    "main": "index.js",
+    "files": [
+        "src/Tween.js"
+    ],
+    "scripts": {
+        "test": "node --test"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ankr/tween.js.git"
+    },
+    "keywords": [
+        "tween",
+        "animations"
+    ],
+    "author": "ankr",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ankr/tween.js/issues"
+    },
+    "homepage": "https://github.com/ankr/tween.js#readme"
+}
