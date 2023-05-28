@@ -1,18 +1,17 @@
+import { EventDispatcher } from "./EventDispatcher.js";
 import { Easings } from "./easings.js";
 
 export class Animation {
   #from;
   #to;
   #duration;
-  #updateCallback;
-  #completeCallback;
-  #easing;
-  #timer;
   #delay = 0;
+  #easing = Easings.Linear.In;
+  #events = new EventDispatcher();
+  #timer;
 
   constructor(manager) {
     this.#timer = manager.timer;
-    this.#easing = Easings.Linear.In;
 
     manager.add(this);
   }
@@ -69,21 +68,21 @@ export class Animation {
         this.#from[key] + easingValue * (this.#to[key] - this.#from[key]);
     }
 
-    this.#updateCallback(result);
+    this.#events.dispatch("update", result);
 
     if (progress >= 1) {
-      this.#completeCallback(result);
+      this.#events.dispatch("complete", result);
     }
   }
 
-  onUpdate(fn) {
-    this.#updateCallback = fn;
+  on(name, fn) {
+    this.#events.on(name, fn);
 
     return this;
   }
 
-  onComplete(fn) {
-    this.#completeCallback = fn;
+  off(name, fn) {
+    this.#events.off(name, fn);
 
     return this;
   }
