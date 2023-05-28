@@ -15,14 +15,6 @@ export class AnimationsManager {
     return animation;
   }
 
-  start() {
-    for (const animation of this.#animations) {
-      animation.start();
-    }
-
-    return this;
-  }
-
   pause() {
     this.timer.pause();
 
