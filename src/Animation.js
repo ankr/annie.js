@@ -1,4 +1,4 @@
-import { easeInLinear } from "./easings.js";
+import { Easings } from "./easings.js";
 
 export class Animation {
   #from;
@@ -12,7 +12,7 @@ export class Animation {
 
   constructor(manager) {
     this.#timer = manager.timer;
-    this.#easing = easeInLinear;
+    this.#easing = Easings.Linear.In;
 
     manager.add(this);
   }
