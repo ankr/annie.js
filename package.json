@@ -28,5 +28,8 @@
     "bugs": {
         "url": "https://github.com/ankr/annie.js/issues"
     },
-    "homepage": "https://github.com/ankr/annie.js#readme"
+    "homepage": "https://github.com/ankr/annie.js#readme",
+    "dependencies": {
+        "@ankr/timer": "^3.0.0"
+    }
 }
