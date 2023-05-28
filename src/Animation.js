@@ -14,6 +14,7 @@ export class Animation {
   #timer;
   #startTime = 0;
   #isStarted = false;
+  #mutate = true;
 
   constructor(manager) {
     this.#timer = manager.timer;
@@ -63,6 +64,12 @@ export class Animation {
     return this;
   }
 
+  mutate(flag) {
+    this.#mutate = flag;
+
+    return this;
+  }
+
   start() {
     for (const key of Object.keys(this.#to)) {
       this.#from[key] = this.#target[key];
@@ -91,8 +98,13 @@ export class Animation {
     const result = {};
 
     for (const key of keys) {
-      result[key] =
+      const value =
         this.#from[key] + easingValue * (this.#to[key] - this.#from[key]);
+      result[key] = value;
+
+      if (this.#mutate) {
+        this.#target[key] = value;
+      }
     }
 
     this.#events.dispatch("update", result);
