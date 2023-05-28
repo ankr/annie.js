@@ -8,7 +8,7 @@ export class AnimationsManager {
   add(animation) {
     this.#animations.add(animation);
 
-    animation.onComplete(() => {
+    animation.on("complete", () => {
       this.#animations.delete(animation);
     });
 
