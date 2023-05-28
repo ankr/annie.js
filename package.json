@@ -1,7 +1,7 @@
 {
-    "name": "@ankr/tween",
+    "name": "@ankr/annie",
     "version": "0.0.1",
-    "description": "",
+    "description": "Simple animation and tweening framework.",
     "type": "module",
     "main": "index.js",
     "files": [
@@ -17,16 +17,16 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ankr/tween.js.git"
+        "url": "git+https://github.com/ankr/annie.js.git"
     },
     "keywords": [
-        "tween",
-        "animations"
+        "animations",
+        "tween"
     ],
     "author": "ankr",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/ankr/tween.js/issues"
+        "url": "https://github.com/ankr/annie.js/issues"
     },
-    "homepage": "https://github.com/ankr/tween.js#readme"
+    "homepage": "https://github.com/ankr/annie.js#readme"
 }
