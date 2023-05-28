@@ -5,7 +5,9 @@
     "type": "module",
     "main": "index.js",
     "files": [
-        "src/Tween.js"
+        "src/Animation.js",
+        "src/AnimationManager.js",
+        "src/easings.js"
     ],
     "scripts": {
         "test": "node --test"

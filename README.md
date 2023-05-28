@@ -1,3 +1,3 @@
-# tween.js
+# annie.js
 
 Simple tween animation library.
