@@ -1,14 +1,19 @@
 import { EventDispatcher } from "./EventDispatcher.js";
 import { Easings } from "./easings.js";
+import { clamp } from "./utils.js";
 
 export class Animation {
-  #from;
+  #target;
+  #from = {};
   #to;
   #duration;
   #delay = 0;
   #easing = Easings.Linear.In;
+  #chain;
   #events = new EventDispatcher();
   #timer;
+  #startTime = 0;
+  #isStarted = false;
 
   constructor(manager) {
     this.#timer = manager.timer;
@@ -16,8 +21,12 @@ export class Animation {
     manager.add(this);
   }
 
-  from(from) {
-    this.#from = from;
+  get #elapsedTime() {
+    return this.#timer.elapsedTime - this.#startTime;
+  }
+
+  from(target) {
+    this.#target = target;
 
     return this;
   }
@@ -46,20 +55,38 @@ export class Animation {
     return this;
   }
 
+  chain(animation) {
+    this.#chain = animation;
+
+    this.on("complete", () => animation.start());
+
+    return this;
+  }
+
   start() {
+    for (const key of Object.keys(this.#to)) {
+      this.#from[key] = this.#target[key];
+    }
+
+    this.#isStarted = true;
+    this.#startTime = this.#timer.now();
+
+    this.#events.dispatch("start");
+
     return this;
   }
 
   update() {
-    if (this.#timer.elapsedTime < this.#delay) {
+    if (!this.#isStarted) {
       return;
     }
 
-    const progress = Math.min(
-      (this.#timer.elapsedTime - this.#delay) / this.#duration,
-      1
-    );
-    const easingValue = this.#easing(progress);
+    if (this.#elapsedTime < this.#delay) {
+      return;
+    }
+
+    const progress = (this.#elapsedTime - this.#delay) / this.#duration;
+    const easingValue = this.#easing(clamp(progress, 0, 1));
     const keys = Object.keys(this.#to);
     const result = {};
 
