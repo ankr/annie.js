@@ -5,9 +5,11 @@
     "type": "module",
     "main": "index.js",
     "files": [
-        "src/Animation.js",
-        "src/AnimationManager.js",
-        "src/easings.js"
+        "src/EventDispatcher.js",
+        "src/Manager.js",
+        "src/Tween.js",
+        "src/easings.js",
+        "src/utils.js"
     ],
     "scripts": {
         "test": "node --test"

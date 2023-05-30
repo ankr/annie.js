@@ -1,4 +1,4 @@
-export class AnimationsManager {
+export class Manager {
   #animations = new Set();
 
   constructor(timer) {
