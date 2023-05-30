@@ -9,9 +9,9 @@ export class Animation {
   #duration;
   #delay = 0;
   #easing = Easings.Linear.In;
-  #chain;
   #events = new EventDispatcher();
   #timer;
+  #reverse = false;
   #startTime = 0;
   #isStarted = false;
   #mutate = true;
@@ -56,15 +56,19 @@ export class Animation {
     return this;
   }
 
-  chain(animation) {
-    this.#chain = animation;
+  reverse(flag = true) {
+    this.#reverse = flag;
 
+    return this;
+  }
+
+  chain(animation) {
     this.on("complete", () => animation.start());
 
     return this;
   }
 
-  mutate(flag) {
+  mutate(flag = true) {
     this.#mutate = flag;
 
     return this;
@@ -92,8 +96,14 @@ export class Animation {
       return;
     }
 
-    const progress = (this.#elapsedTime - this.#delay) / this.#duration;
-    const easingValue = this.#easing(clamp(progress, 0, 1));
+    const progress = clamp(
+      (this.#elapsedTime - this.#delay) / this.#duration,
+      0,
+      1
+    );
+    const easingValue = this.#reverse
+      ? 1 - this.#easing(progress)
+      : this.#easing(progress);
     const keys = Object.keys(this.#to);
     const result = {};
 
