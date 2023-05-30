@@ -1,28 +1,28 @@
 export class EventDispatcher {
-  #listeners = {};
+  #observers = {};
 
   on(name, fn) {
-    if (!this.#listeners[name]) {
-      this.#listeners[name] = new Set();
+    if (!this.#observers[name]) {
+      this.#observers[name] = new Set();
     }
 
-    this.#listeners[name].add(fn);
+    this.#observers[name].add(fn);
   }
 
   of(name, fn) {
-    if (!this.#listeners[name]) {
+    if (!this.#observers[name]) {
       return;
     }
 
-    this.#listeners[name].delete(fn);
+    this.#observers[name].delete(fn);
   }
 
   dispatch(name, payload) {
-    if (!this.#listeners[name]) {
+    if (!this.#observers[name]) {
       return;
     }
 
-    for (const fn of this.#listeners[name]) {
+    for (const fn of this.#observers[name]) {
       fn(payload);
     }
   }
