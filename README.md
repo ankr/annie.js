@@ -15,7 +15,7 @@ const manager = new Manager(timer);
 const target = { x: 100, y: 100 };
 
 // Create tween animation
-const animation = new Tween(manager)
+const tween = new Tween(manager)
     .from(target)
     .to({ x: 500, y: 500 })
     .duration(2000)
@@ -24,7 +24,7 @@ const animation = new Tween(manager)
 
 // Kick everything off
 requestAnimationFrame(() => {
-    animation.start();
+    tween.start();
     loop();
 });
 
