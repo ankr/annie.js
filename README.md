@@ -1,30 +1,30 @@
 # annie.js
 
-Simple tween animation library.
+Simple animation library.
 
 ## Example
 
 ```javascript
 import { Timer } from "@ankr/timer";
-import { Animation, AnimationsManager, Easings } from "@ankr/annie";
-
-const target = { x: 100, y: 100 };
+import { Tween, Manager, Easings } from "@ankr/annie";
 
 // Setup timer and animations manager
 const timer = new Timer();
-const manager = new AnimationsManager(timer);
+const manager = new Manager(timer);
 
-// Create animation
-const animation = new Animation(manager)
+const target = { x: 100, y: 100 };
+
+// Create tween animation
+const animation = new Tween(manager)
     .from(target)
     .to({ x: 500, y: 500 })
     .duration(2000)
     .delay(500)
-    .easing(Easings.Elastic.Out);
+    .easing(Easings.Bounce.Out);
 
 // Kick everything off
 requestAnimationFrame(() => {
-    first.start();
+    animation.start();
     loop();
 });
 
@@ -32,10 +32,10 @@ requestAnimationFrame(() => {
 const loop = () => {
     requestAnimationFrame(loop);
 
-    // Remember to tick the timer forward
+    // Remember to tick the timer forward ...
     timer.tick();
 
-    // Before updating animations
+    // ... before updating animations
     manager.update();
 
     // Draw target

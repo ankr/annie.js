@@ -2,7 +2,7 @@ import { EventDispatcher } from "./EventDispatcher.js";
 import { Easings } from "./easings.js";
 import { clamp } from "./utils.js";
 
-export class Animation {
+export class Tween {
   #target;
   #from = {};
   #to;
